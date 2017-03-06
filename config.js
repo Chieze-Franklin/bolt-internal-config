@@ -3,6 +3,8 @@
 var fs = require("fs");
 var path = require("path");
 
+var __host;
+var __port;
 var __ports;
 var __config;
 var getConfig = function(){
@@ -47,7 +49,10 @@ module.exports = {
 		return getConfig().friendlyVersion;
 	},
 	getHost : function(){
-		return getConfig().host;
+		if(__host) return __host;
+
+		__host = getConfig().host;
+		return __host;
 	},
 	getMinimumVersion : function(){
 		return getConfig().minimumVersion;
@@ -59,7 +64,10 @@ module.exports = {
 		return getConfig().name;
 	},
 	getPort : function(){
-		return getConfig().port;
+		if(__port) return __port;
+
+		__port = getConfig().port;
+		return __port;
 	},
 	getProtocol : function(){
 		return getConfig().protocol;
@@ -69,5 +77,12 @@ module.exports = {
 	},
 	getVersion : function(){
 		return getConfig().version;
+	},
+
+	setHost : function(host){
+		__host = host;
+	},
+	setPort : function(port){
+		__port = port;
 	}
 };
